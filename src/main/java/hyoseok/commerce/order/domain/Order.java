@@ -1,7 +1,7 @@
-package hyoseok.commerce.domain.order;
+package hyoseok.commerce.order.domain;
 
 import hyoseok.commerce.common.entity.BaseTimeEntity;
-import hyoseok.commerce.domain.user.User;
+import hyoseok.commerce.user.domain.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
