@@ -2,7 +2,6 @@ package hyoseok.commerce.common.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
@@ -10,35 +9,41 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
 
-    private final boolean success;
+    private final String code;
     private final String message;
-    private final int code;
     private final T data;
     private final LocalDateTime timestamp;
 
-    private ApiResponse(boolean success, String message, int code, T data) {
-        this.success = success;
-        this.message = message;
+    private ApiResponse(String code, String message, T data) {
         this.code = code;
+        this.message = message;
         this.data = data;
         this.timestamp = LocalDateTime.now();
     }
 
     /* 성공 응답 생성 메서드 */
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<>(true, "Success", HttpStatus.OK.value(), data);
+        return new ApiResponse<>(ResponseCode.OK.getCode(), ResponseCode.OK.getMessage(), data);
     }
 
     public static <T> ApiResponse<T> success(String message, T data) {
-        return new ApiResponse<>(true, message, HttpStatus.OK.value(), data);
+        return new ApiResponse<>(ResponseCode.OK.getCode(), message, data);
     }
 
     /* 에러 응답 생성 메서드 */
-    public static <T> ApiResponse<T> error(String message, HttpStatus status) {
-        return new ApiResponse<>(false, message, status.value(), null);
+    public static <T> ApiResponse<T> error(ResponseCode code) {
+        return new ApiResponse<>(code.getCode(), code.getMessage(), null);
     }
 
-    public static <T> ApiResponse<T> error(String message, HttpStatus status, T data) {
-        return new ApiResponse<>(false, message, status.value(), data);
+    public static <T> ApiResponse<T> error(ResponseCode code, String message) {
+        return new ApiResponse<>(code.getCode(), message, null);
+    }
+
+    public static <T> ApiResponse<T> error(ResponseCode code, T data) {
+        return new ApiResponse<>(code.getCode(), code.getMessage(), data);
+    }
+
+    public static <T> ApiResponse<T> success(String code, String message) {
+        return new ApiResponse<>(code, message, null);
     }
 }
