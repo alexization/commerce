@@ -2,7 +2,7 @@ package hyoseok.commerce.user.service;
 
 import hyoseok.commerce.common.exception.BusinessException;
 import hyoseok.commerce.common.response.ResponseCode;
-import hyoseok.commerce.domain.user.User;
+import hyoseok.commerce.user.domain.User;
 import hyoseok.commerce.user.repository.UserRepository;
 import hyoseok.commerce.user.service.dto.UserRegisterRequest;
 import hyoseok.commerce.user.service.dto.UserRegisterResponse;

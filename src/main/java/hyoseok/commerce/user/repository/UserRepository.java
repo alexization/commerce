@@ -1,6 +1,6 @@
 package hyoseok.commerce.user.repository;
 
-import hyoseok.commerce.domain.user.User;
+import hyoseok.commerce.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

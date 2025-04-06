@@ -1,6 +1,6 @@
 package hyoseok.commerce.user.service.dto;
 
-import hyoseok.commerce.domain.user.User;
+import hyoseok.commerce.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 

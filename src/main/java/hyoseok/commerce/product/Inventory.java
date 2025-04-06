@@ -1,4 +1,4 @@
-package hyoseok.commerce.domain.product;
+package hyoseok.commerce.product;
 
 import hyoseok.commerce.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;

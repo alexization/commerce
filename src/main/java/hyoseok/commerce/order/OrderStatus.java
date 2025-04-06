@@ -1,4 +1,4 @@
-package hyoseok.commerce.domain.order;
+package hyoseok.commerce.order;
 
 public enum OrderStatus {
     PENDING, COMPLETED, CANCELLED
