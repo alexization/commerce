@@ -1,6 +1,7 @@
 package hyoseok.commerce.user.domain;
 
 import hyoseok.commerce.common.entity.BaseTimeEntity;
+
 import hyoseok.commerce.common.exception.BusinessException;
 import hyoseok.commerce.common.response.ResponseCode;
 import hyoseok.commerce.cart.Cart;
@@ -8,12 +9,15 @@ import hyoseok.commerce.order.Order;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.regex.Pattern;
+
 
 @Entity
 @Getter
@@ -71,4 +75,5 @@ public class User extends BaseTimeEntity {
             throw new BusinessException(ResponseCode.INVALID_NAME);
         }
     }
+
 }
