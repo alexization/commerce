@@ -1,15 +1,23 @@
 package hyoseok.commerce.user.domain;
 
 import hyoseok.commerce.common.entity.BaseTimeEntity;
-import hyoseok.commerce.cart.domain.Cart;
-import hyoseok.commerce.order.domain.Order;
+
+import hyoseok.commerce.common.exception.BusinessException;
+import hyoseok.commerce.common.response.ResponseCode;
+import hyoseok.commerce.cart.Cart;
+import hyoseok.commerce.order.Order;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import java.util.regex.Pattern;
+
 
 @Entity
 @Getter
@@ -33,4 +41,39 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
+
+    @Builder
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
+
+    public static User createUser(String email, String name) {
+        validateEmail(email);
+        validateName(name);
+
+        return User.builder()
+                .email(email)
+                .name(name)
+                .build();
+    }
+
+    private static void validateEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new BusinessException(ResponseCode.INVALID_EMAIL);
+        }
+        if (!Pattern.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", email)) {
+            throw new BusinessException(ResponseCode.INVALID_EMAIL);
+        }
+    }
+
+    private static void validateName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new BusinessException(ResponseCode.INVALID_NAME);
+        }
+        if (name.length() < 2 || name.length() > 10){
+            throw new BusinessException(ResponseCode.INVALID_NAME);
+        }
+    }
+
 }
